@@ -46,7 +46,6 @@ tg_post_msg() {
 }
 # Compile
 compile(){
-cd ${KERNEL_ROOTDIR}
 make kernelversion
 export VERSION=$(make kernelversion)-Finix-kernel
 export KERNEL_USE_CCACHE=1
@@ -77,7 +76,7 @@ function push() {
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s).%0A %0A<b>$KERNEL_NAME-(rosy)</b>%0AKernel Version : <code>${VERSION}</code>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AClang Version : <code>${KBUILD_COMPILER_STRING}</code>"
+        -F caption="$info"
 }
 # Fin Error
 function finerr() {
@@ -97,6 +96,26 @@ function zipping() {
     zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
     cd $PWD
 }
+
+info()
+{
+    kernel_version=$(cat $(pwd)/out/.config | grep Linux/arm64 | cut -d " " -f3)
+    uts_version=$(cat $(pwd)/out/include/generated/compile.h | grep UTS_VERSION | cut -d '"' -f2)
+    toolchain_version=$(cat $(pwd)/out/include/generated/compile.h | grep LINUX_COMPILER | cut -d '"' -f2)
+    trigger_sha="$(git rev-parse HEAD)"
+    latest_commit="$(git log --pretty=format:'%s' -1)"
+    commit_by="$(git log --pretty=format:'by %an' -1)"
+    commit_template="$(echo ${trigger_sha} | cut -c 1-8) (\"<a href='https://github.com/NFS-projects/kernel_xiaomi_rosy/commit/${trigger_sha}'>${latest_commit}</a>\")"
+    caption_template="
+    👤 <b>Owner</b>: AnGgIt86
+    🏚️ Linux version: $kernel_version
+    💡 Compiler: $toolchain_version
+    🎁 Top commit: $latest_commit
+    👩‍💻 Commit author: $commit_by
+    🐧 UTS version: $uts_version
+    Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
+}
+cd ${KERNEL_ROOTDIR}
 env
 check
 compile

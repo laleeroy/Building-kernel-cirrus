@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-cd $PWD/${KERNEL_ROOTDIR}
-make O=out clean && make O=out mrproper && rm -rf $PWD/AnyKernel
+cd ${KERNEL_ROOTDIR}
+make -j8 O=out clean && make -j8 O=out mrproper && rm -rf $PWD/AnyKernel
 cd $PWD
