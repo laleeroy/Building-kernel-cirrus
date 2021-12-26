@@ -33,8 +33,8 @@ task:
   Remove_old_build_script:
       - ./eleven/rm.sh
 
-  Build_kernel_GCC_script:
-      - ./eleven/gcc.sh
+#  Build_kernel_GCC_script:
+#      - ./eleven/gcc.sh
       
   Update_ccache_script:
       - ./eleven/done.sh
