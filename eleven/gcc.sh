@@ -113,4 +113,5 @@ check
 compile
 END=$(date +"%s")
 DIFF=$(($END - $START))
+info
 push
