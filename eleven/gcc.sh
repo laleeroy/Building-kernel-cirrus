@@ -3,14 +3,14 @@
 # Main Declaration
 function env() {
 export KERNEL_NAME=Finix-カーネル-バラ色-GCC
-KERNEL_ROOTDIR=$PWD/$DEVICE_CODENAME
+KERNEL_ROOTDIR=$OLDPWD/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
-GCC_ROOTDIR=$PWD/GCC64
-GCC_ROOTDIR32=$PWD/GCC32
+GCC_ROOTDIR=$OLDPWD/GCC64
+GCC_ROOTDIR32=$OLDPWD/GCC32
 GCC_VER="$("$GCC_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 GCC_VER32="$("$GCC_ROOTDIR32"/bin/arm-eabi-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$GCC_ROOTDIR"/bin/ld.lld --version | head -n 1)"
-IMAGE=$PWD/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
+IMAGE=$OLDPWD/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 export KBUILD_BUILD_USER=$BUILD_USER
@@ -62,12 +62,12 @@ make -j8 ARCH=arm64 SUBARCH=arm64 O=out \
 	finerr
 	exit 1
    fi
-	git clone --depth=1 $ANYKERNEL $PWD/AnyKernel
-	cp $IMAGE $PWD/AnyKernel
+	git clone --depth=1 $ANYKERNEL $OLDPWD/AnyKernel
+	cp $IMAGE $OLDPWD/AnyKernel
 }
 # Push kernel to channel
 function push() {
-    cd $PWD/AnyKernel
+    cd $OLDPWD/AnyKernel
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
@@ -89,9 +89,9 @@ function finerr() {
 }
 # Zipping
 function zipping() {
-    cd $PWD/AnyKernel
+    cd $OLDPWD/AnyKernel
     zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
-    cd $PWD
+    cd $OLDPWD
 }
 env
 check
