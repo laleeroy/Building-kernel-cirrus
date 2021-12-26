@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 mkdir -p ~/.config/rclone
-echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
+echo "$RCLONECONFIG" > ~/.config/rclone/rclone.conf
 mkdir -p /tmp/ccache
 cd /tmp
 rclone copy NFS:ccache/kernel/ccache.tar.gz /tmp -P
