@@ -50,7 +50,7 @@ cd ${KERNEL_ROOTDIR}
 make kernelversion
 export VERSION=$(make kernelversion)-Finix-kernel
 export KERNEL_USE_CCACHE=1
-tg_post_msg "<b>$KERNEL_NAME-(rosy)</b>%0AKernel Version : <code>${VERSION}</code>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AClang Version : <code>${KBUILD_COMPILER_STRING}</code>"
+tg_post_msg "<b>Buiild Kernel Clang started..</b>"
 make -j8 O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j8 ARCH=arm64 SUBARCH=arm64 O=out \
     CC=${CLANG_ROOTDIR}/bin/clang \
@@ -66,18 +66,18 @@ make -j8 ARCH=arm64 SUBARCH=arm64 O=out \
 	finerr
 	exit 1
    fi
-	git clone --depth=1 $ANYKERNEL AnyKernel
-	cp $IMAGE AnyKernel
+	git clone --depth=1 $ANYKERNEL $PWD/AnyKernel
+	cp $IMAGE $PWD/AnyKernel
 }
 # Push kernel to channel
 function push() {
-    cd AnyKernel
+    cd $PWD/AnyKernel
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)." 
+        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s).%0A %0A<b>$KERNEL_NAME-(rosy)</b>%0AKernel Version : <code>${VERSION}</code>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AClang Version : <code>${KBUILD_COMPILER_STRING}</code>"
 }
 # Fin Error
 function finerr() {
@@ -86,15 +86,16 @@ function finerr() {
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
         -d text="Build throw an error(s)" \
+    curl -s -X POST "$BOT_MSG_URL2/sendSticker" \
         -d sticker="CAACAgIAAx0CXjGT1gACDRRhYsUKSwZJQFzmR6eKz2aP30iKqQACPgADr8ZRGiaKo_SrpcJQIQQ" \
         -d chat_id="$TG_CHAT_ID"
     exit 1
 }
 # Zipping
 function zipping() {
-    cd AnyKernel
+    cd $PWD/AnyKernel
     zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
-    cd ../
+    cd $PWD
 }
 env
 check
