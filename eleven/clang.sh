@@ -78,13 +78,10 @@ function push() {
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="<b>$KERNEL_NAME</b>
-        👤 <b>Owner:</b> <code>AnGgIt86</code>
-        🏚️ <b>Linux version:</b> <code>$VERSION</code>
-        💡 <b>Compiler:</b> <code>$TOOLCHAIN_VERSION</code>
-        🎁 <b>Top commit:</b> <code>xxxx</code>
-        👩‍💻 <b>Commit author:</b> <code>xxxx</code>
-        🐧 <b>UTS version:</b> <code>$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep UTS_VERSION | cut -d '"' -f2)</code>
+        -F caption="$KERNEL_NAME
+        👤 Owner: AnGgIt86
+        🏚️ Linux version: $VERSION
+        💡 Compiler: $TOOLCHAIN_VERSION
         Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
 # Fin Error
