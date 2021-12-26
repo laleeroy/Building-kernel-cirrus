@@ -3,12 +3,12 @@
 # Main Declaration
 function env() {
 export KERNEL_NAME=Finix-カーネル-バラ色-CLANG
-KERNEL_ROOTDIR=$OLDPWD/$DEVICE_CODENAME
+KERNEL_ROOTDIR=$pwd/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-clang_defconfig
-CLANG_ROOTDIR=$OLDPWD/CLANG
+CLANG_ROOTDIR=$pwd/CLANG
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
-IMAGE=$OLDPWD/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
+IMAGE=$pwd/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 export KBUILD_BUILD_USER=$BUILD_USER
@@ -66,12 +66,13 @@ make -j8 ARCH=arm64 SUBARCH=arm64 O=out \
 	finerr
 	exit 1
    fi
-	git clone --depth=1 $ANYKERNEL $OLDPWD/AnyKernel
-	cp $IMAGE $OLDPWD/AnyKernel
+	git clone --depth=1 $ANYKERNEL $pwd/AnyKernel
+	cp $IMAGE $pwd/AnyKernel
 }
 # Push kernel to channel
 function push() {
-    cd $OLDPWD/AnyKernel
+    cd $pwd/AnyKernel
+    zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
@@ -98,16 +99,9 @@ function finerr() {
         -d chat_id="$TG_CHAT_ID"
     exit 1
 }
-# Zipping
-function zipping() {
-    cd $OLDPWD/AnyKernel
-    zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
-    cd $OLDPWD
-}
 env
 check
 compile
-zipping
 END=$(date +"%s")
 DIFF=$(($END - $START))
 push

@@ -11,7 +11,7 @@ tg_post_msg() {
 
 }
 
-cd $OLDPWD
+cd $pwd
 
 com ()
 {

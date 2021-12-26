@@ -2,8 +2,8 @@
 
 mkdir -p ~/.config/rclone
 echo "$RCLONECONFIG" > ~/.config/rclone/rclone.conf
-cd $OLDPWD
-rclone copy NFS:ccache/kernel/ccache.tar.gz $OLDPWD -P
+cd $pwd
+rclone copy NFS:ccache/kernel/ccache.tar.gz $pwd -P
 time tar xf ccache.tar.gz
 rm -rf ccache.tar.gz
 cat /etc/os*
