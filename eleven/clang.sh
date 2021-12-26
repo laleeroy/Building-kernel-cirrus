@@ -79,7 +79,7 @@ function push() {
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
         -F caption="$KERNEL_NAME
-====================
+=========================
 👤 Owner: AnGgIt86
 🏚️ Linux version: $KERNEL_VERSION
 🌿 Branch: $BRANCH
@@ -87,7 +87,7 @@ function push() {
 👩‍💻 Commit author: $COMMIT_BY
 🐧 UTS version: $UTS_VERSION
 💡 Compiler: $TOOLCHAIN_VERSION
-====================
+=========================
 Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
 # Fin Error
@@ -109,7 +109,7 @@ UTS_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep UTS_VER
 TOOLCHAIN_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep LINUX_COMPILER | cut -d '"' -f2)
 TRIGGER_SHA="$(git rev-parse HEAD)"
 LATEST_COMMIT="$(git log --pretty=format:'%s' -1)"
-COMMIT_BY="$(git log --pretty=format:'by %an' -1)"
+COMMIT_BY="$(cat $KERNEL_ROOTDIR git log --pretty=format:'by %an' -1)"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 }
