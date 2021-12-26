@@ -78,11 +78,12 @@ function push() {
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="$KERNEL_NAME
-        👤 Owner: AnGgIt86
-        🏚️ Linux version: $VERSION
-        💡 Compiler: $TOOLCHAIN_VERSION
-        Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
+        -F caption="<b>$KERNEL_NAME</b>
+
+👤 Owner: AnGgIt86
+🏚️ Linux version: $VERSION
+💡 Compiler: $KBUILD_COMPILER_STRING
+Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
 # Fin Error
 function finerr() {
