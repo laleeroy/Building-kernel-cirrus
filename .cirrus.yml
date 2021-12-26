@@ -1,0 +1,37 @@
+env:
+    rcloneconfig: "ENCRYPTED[bebf797cf347087b40868d7aefda0ce31c6520808e6ea5d4dcfe2dbeb07b21631351399468021970103449667294fda1]"
+    TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
+    TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
+    CIRRUS_CLONE_DEPTH: 1
+    CIRRUS_WORKING_DIR: "/tmp"
+    
+task:
+  name: "Kernel deploy.."
+  timeout_in: 2h
+  container:
+      image: anggit86/dev:latest
+      cpu: 8
+      memory: 32G
+        
+  Build-Env-Setup_background_script:
+       - ./eleven/env.sh
+
+  Storage-Checker_background_script:
+      - df -h
+      - lsblk
+      - ls -l -a -h
+  
+  Sync_script:
+      - ./eleven/download.sh
+
+  Build_kernel_GCC_script:
+      - ./eleven/gcc.sh
+
+  Remove_old_build_script:
+      - ./eleven/rm.sh
+
+  Build_kernel_Clang_script:
+      - ./eleven/clang.sh
+      
+  Update_ccache_script:
+      - ./eleven/done.sh
