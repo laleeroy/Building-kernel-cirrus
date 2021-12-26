@@ -3,12 +3,12 @@
 # Main Declaration
 function env() {
 export KERNEL_NAME=Finix-カーネル-バラ色-CLANG
-KERNEL_ROOTDIR=/tmp/$DEVICE_CODENAME
+KERNEL_ROOTDIR=$PWD/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-clang_defconfig
-CLANG_ROOTDIR=/tmp/CLANG
+CLANG_ROOTDIR=$PWD/CLANG
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
-IMAGE=/tmp/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
+IMAGE=$PWD/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 export KBUILD_BUILD_USER=$BUILD_USER

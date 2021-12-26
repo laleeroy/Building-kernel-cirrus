@@ -11,7 +11,7 @@ tg_post_msg() {
 
 }
 
-cd /tmp
+cd $PWD
 
 com ()
 {

@@ -3,14 +3,14 @@
 # Main Declaration
 function env() {
 export KERNEL_NAME=Finix-カーネル-バラ色-GCC
-KERNEL_ROOTDIR=/tmp/$DEVICE_CODENAME
+KERNEL_ROOTDIR=$PWD/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
-GCC_ROOTDIR=/tmp/GCC64
-GCC_ROOTDIR32=/tmp/GCC32
+GCC_ROOTDIR=$PWD/GCC64
+GCC_ROOTDIR32=$PWD/GCC32
 GCC_VER="$("$GCC_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 GCC_VER32="$("$GCC_ROOTDIR32"/bin/arm-eabi-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$GCC_ROOTDIR"/bin/ld.lld --version | head -n 1)"
-IMAGE=/tmp/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
+IMAGE=$PWD/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 export KBUILD_BUILD_USER=$BUILD_USER
