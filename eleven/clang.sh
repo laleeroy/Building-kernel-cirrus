@@ -96,9 +96,33 @@ function finerr() {
         -d chat_id="$TG_CHAT_ID"
     exit 1
 }
+
+function test1() {
+KERNEL_VERSION=$(cat $KERNEL_ROOTDIR/out/.config | grep Linux/arm64 | cut -d " " -f3)
+UTS_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep UTS_VERSION | cut -d '"' -f2)
+TOOLCHAIN_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep LINUX_COMPILER | cut -d '"' -f2)
+TRIGGER_SHA="$(git rev-parse HEAD)"
+LATEST_COMMIT="$(git log --pretty=format:'%s' -1)"
+COMMIT_BY="$(git log --pretty=format:'by %an' -1)"
+COMMIT_TEMPLATE="$(echo ${trigger_sha} | cut -c 1-8) (\"<a href='https://github.com/NFS-projects/kernel_xiaomi_rosy/commit/${trigger_sha}'>${latest_commit}</a>\")"
+}
+
+function test2() {
+echo ================================================
+echo $KERNEL_VERSION
+echo $UTS_VERSION
+echo $TOOLCHAIN_VERSION
+echo $TRIGGER_SHA
+echo $LATEST_COMMIT
+echo $COMMIT_BY
+echo $COMMIT_TEMPLATE
+echo ================================================
+}
 env
 check
 compile
 END=$(date +"%s")
 DIFF=$(($END - $START))
+test1
 push
+test2
