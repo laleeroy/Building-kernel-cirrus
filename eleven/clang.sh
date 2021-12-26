@@ -79,7 +79,7 @@ function push() {
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
         -F caption="$KERNEL_NAME
-============
+====================
 👤 Owner: AnGgIt86
 🏚️ Linux version: $KERNEL_VERSION
 🌿 Branch: $BRANCH
@@ -87,7 +87,7 @@ function push() {
 👩‍💻 Commit author: $COMMIT_BY
 🐧 UTS version: $UTS_VERSION
 💡 Compiler: $TOOLCHAIN_VERSION
-============
+====================
 Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
 # Fin Error
