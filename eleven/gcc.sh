@@ -50,8 +50,6 @@ tg_post_msg() {
 # Compile
 compile(){
 cd ${KERNEL_ROOTDIR}
-make kernelversion
-export VERSION=$(make kernelversion)-Finix-kernel
 export KERNEL_USE_CCACHE=1
 tg_post_msg "<b>Build Kernel GCC Started..</b>"
 make -j8 O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
@@ -68,12 +66,23 @@ make -j8 ARCH=arm64 SUBARCH=arm64 O=out \
 # Push kernel to channel
 function push() {
     cd $pwd/AnyKernel
+    zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s).%0A %0A<b>$KERNEL_NAME-(rosy)</b>%0AKernel Version : <code>${VERSION}</code>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AGCC Version : <code>${KBUILD_COMPILER_STRING}</code>%0AGCC Version32 : <code>${KBUILD_COMPILER_STRING32}</code>"
+        -F caption="$KERNEL_NAME
+=========================
+👤 Owner: AnGgIt86
+🏚️ Linux version: $KERNEL_VERSION
+🌿 Branch: $BRANCH
+🎁 Top commit: $LATEST_COMMIT
+👩‍💻 Commit author: $COMMIT_BY
+🐧 UTS version: $UTS_VERSION
+💡 Compiler: $TOOLCHAIN_VERSION
+=========================
+Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
 # Fin Error
 function finerr() {
@@ -87,16 +96,21 @@ function finerr() {
         -d chat_id="$TG_CHAT_ID"
     exit 1
 }
-# Zipping
-function zipping() {
-    cd $pwd/AnyKernel
-    zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
-    cd $pwd
+
+function info() {
+cd $KERNEL_ROOTDIR
+KERNEL_VERSION=$(cat $KERNEL_ROOTDIR/out/.config | grep Linux/arm64 | cut -d " " -f3)
+UTS_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep UTS_VERSION | cut -d '"' -f2)
+TOOLCHAIN_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep LINUX_COMPILER | cut -d '"' -f2)
+TRIGGER_SHA="$(git rev-parse HEAD)"
+LATEST_COMMIT="$(git log --pretty=format:'%s' -1)"
+COMMIT_BY="$(git log --pretty=format:'by %an' -1)"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
 }
 env
 check
 compile
-zipping
 END=$(date +"%s")
 DIFF=$(($END - $START))
 push

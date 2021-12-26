@@ -47,8 +47,6 @@ tg_post_msg() {
 # Compile
 compile(){
 cd ${KERNEL_ROOTDIR}
-make kernelversion
-export VERSION=$(make kernelversion)
 export KERNEL_USE_CCACHE=1
 tg_post_msg "<b>Buiild Kernel Clang started..</b>"
 make -j8 O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
@@ -104,12 +102,13 @@ function finerr() {
 }
 
 function info() {
+cd $KERNEL_ROOTDIR
 KERNEL_VERSION=$(cat $KERNEL_ROOTDIR/out/.config | grep Linux/arm64 | cut -d " " -f3)
 UTS_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep UTS_VERSION | cut -d '"' -f2)
 TOOLCHAIN_VERSION=$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep LINUX_COMPILER | cut -d '"' -f2)
 TRIGGER_SHA="$(git rev-parse HEAD)"
 LATEST_COMMIT="$(git log --pretty=format:'%s' -1)"
-COMMIT_BY="$(cat $KERNEL_ROOTDIR git log --pretty=format:'by %an' -1)"
+COMMIT_BY="$(git log --pretty=format:'by %an' -1)"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 }
