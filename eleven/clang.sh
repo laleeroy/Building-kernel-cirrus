@@ -83,7 +83,7 @@ function push() {
         💡 <b>Compiler:</b> <code>$TOOLCHAIN_VERSION</code>
         🎁 <b>Top commit:</b> <code>xxxx</code>
         👩‍💻 <b>Commit author:</b> <code>xxxx</code>
-        🐧 <b>UTS version:</b> <code>$(cat $PWD/out/include/generated/compile.h | grep UTS_VERSION | cut -d '"' -f2)</code>
+        🐧 <b>UTS version:</b> <code>$(cat $KERNEL_ROOTDIR/out/include/generated/compile.h | grep UTS_VERSION | cut -d '"' -f2)</code>
         Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
 # Fin Error
