@@ -78,8 +78,7 @@ function push() {
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="<b>$KERNEL_NAME</b>
-
+        -F caption="$KERNEL_NAME
 👤 Owner: AnGgIt86
 🏚️ Linux version: $VERSION
 💡 Compiler: $KBUILD_COMPILER_STRING
