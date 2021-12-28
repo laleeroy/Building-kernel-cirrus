@@ -52,8 +52,8 @@ compile(){
 cd ${KERNEL_ROOTDIR}
 export KERNEL_USE_CCACHE=1
 tg_post_msg "<b>Build Kernel GCC Started..</b>"
-make -j10 O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
-make -j10 ARCH=arm64 SUBARCH=arm64 O=out \
+make -j8 O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
+make -j8 ARCH=arm64 SUBARCH=arm64 O=out \
     CROSS_COMPILE=${GCC_ROOTDIR}/bin/aarch64-elf- \
     CROSS_COMPILE_ARM32=${GCC_ROOTDIR32}/bin/arm-eabi-
    if ! [ -a "$IMAGE" ]; then

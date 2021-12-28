@@ -49,8 +49,8 @@ compile(){
 cd ${KERNEL_ROOTDIR}
 export KERNEL_USE_CCACHE=1
 tg_post_msg "<b>Buiild Kernel Clang started..</b>"
-make -j10 O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
-make -j10 ARCH=arm64 SUBARCH=arm64 O=out \
+make -j8 O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
+make -j8 ARCH=arm64 SUBARCH=arm64 O=out \
     CC=${CLANG_ROOTDIR}/bin/clang \
     LLVM_AR=${CLANG_ROOTDIR}/bin/llvm-ar \
     LLVM_DIS=${CLANG_ROOTDIR}/bin/llvm-dis \
