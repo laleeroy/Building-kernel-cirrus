@@ -2,7 +2,7 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=Finix-カーネル-バラ色-GCC
+export KERNEL_NAME=Finix-kernel-Experiment-GCC
 KERNEL_ROOTDIR=$pwd/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
 GCC_ROOTDIR=$pwd/GCC64
