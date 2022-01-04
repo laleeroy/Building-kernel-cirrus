@@ -2,8 +2,8 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth=1 https://github.com/NFS-projects/kernel_xiaomi_rosy -b eleven $pwd/$DEVICE_CODENAME
+git clone --depth=1 https://github.com/NFS-projects/kernel_xiaomi_rosy -b twelve $pwd/$DEVICE_CODENAME
 # Toolchain
-git clone --depth=1 https://github.com/NFS-projects/gcc-arm -b 12.x $pwd/GCC32
-git clone --depth=1 https://github.com/NFS-projects/gcc-arm64 -b 12.x $pwd/GCC64
-git clone --depth=1 https://github.com/NFS-projects/NFS-clang -b main $pwd/CLANG
+git clone --depth=1 https://github.com/NFS-projects/gcc-arm -b 11.x $pwd/GCC32
+git clone --depth=1 https://github.com/NFS-projects/gcc-arm64 -b 11.x $pwd/GCC64
+git clone --depth=1 https://gitlab.com/AnGgIt86/nfs-clang.git -b main $pwd/CLANG
