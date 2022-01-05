@@ -2,7 +2,7 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=Finix-カーネル-バラ色-CLANG
+export KERNEL_NAME=NeedForSpeed-カーネル-バラ色-CLANG
 KERNEL_ROOTDIR=$pwd/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-clang_defconfig
 CLANG_ROOTDIR=$pwd/CLANG
