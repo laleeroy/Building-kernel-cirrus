@@ -15,10 +15,7 @@ task:
       image: anggit86/dev:latest
       cpu: 8
       memory: 32G
-        
-  Build-Env-Setup_background_script:
-       - ./eleven/env.sh
-
+      
   Storage-Checker_background_script:
       - df -h
       - lsblk
@@ -36,5 +33,3 @@ task:
   Build_kernel_GCC_script:
       - ./eleven/gcc.sh
       
-  Update_ccache_script:
-      - ./eleven/done.sh
