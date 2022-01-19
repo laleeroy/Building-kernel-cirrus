@@ -2,7 +2,7 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=NeedForSpeed-カーネル-バラ色-GCC
+export KERNEL_NAME=Baunilla-kernel-GCC-Test
 KERNEL_ROOTDIR=$pwd/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
 GCC_ROOTDIR=$pwd/GCC64

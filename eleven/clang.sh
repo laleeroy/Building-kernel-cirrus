@@ -2,9 +2,9 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=NeedForSpeed-カーネル-バラ色-CLANG
+export KERNEL_NAME=Baunilla-kernel-CLANG-Test
 KERNEL_ROOTDIR=$pwd/$DEVICE_CODENAME
-DEVICE_DEFCONFIG=rosy-clang_defconfig
+DEVICE_DEFCONFIG=rosy-perf_defconfig
 CLANG_ROOTDIR=$pwd/CLANG
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
