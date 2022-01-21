@@ -12,7 +12,7 @@ task:
   name: "Kernel deploy.."
   timeout_in: 2h
   container:
-      image: anggit86/dev:latest
+      image: anggit86/docker:cirrus
       cpu: 8
       memory: 32G
       
