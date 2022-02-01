@@ -11,7 +11,7 @@ tg_post_msg() {
 
 }
 
-cd $pwd
+cd $CIRRUS_WORKING_DIR
 
 curl -s -X POST "$BOT_MSG_URL2/sendSticker" \
 -d sticker="CAACAgIAAx0CXjGT1gACAeVg69gXIw-a6h1nvmmaub51tQQwCgACLQMAAsbMYwIquW4nbs0crSAE" \
