@@ -6,7 +6,6 @@ env:
     ANYKERNEL: "ENCRYPTED[714d28db47c375058945b8d323018b30653959617dbd6cc17aaf16b33d124ad13e714bc0fae0bfbaec5c4842dd8589f2]"
     TG_TOKEN: "ENCRYPTED[722989143188a0c0d6e9b92f2f00e620f91f3e14a0d7a729d9566f062fff0ccde4953490d449b521e08832883247e12a]"
     TG_CHAT_ID: "ENCRYPTED[52ef97ea6128737b88337a868fbf49e705bfa470759ef47d62f119c39dd53ce152192bbddfbf8ff216ce3c1e3a824042]"
-    RCLONECONFIG: "ENCRYPTED[bece68fe5c12aa3c8c4f1947d259441433792dedd28f06e03fada62cbb940b34662858cee1a0aded71a858742a17978f]"
     
 task:
   name: "Kernel deploy.."
@@ -15,11 +14,13 @@ task:
       image: anggit86/docker:cirrus
       cpu: 8
       memory: 32G
-      
-  Storage-Checker_background_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
+
+  Environment_script:
+      - cat /etc/os*
+      - env
+
+  Spec-Check_script:
+      - ./disk.sh
   
   Sync_script:
       - ./download.sh
