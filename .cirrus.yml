@@ -22,16 +22,16 @@ task:
       - ls -l -a -h
   
   Sync_script:
-      - ./eleven/download.sh
+      - ./download.sh
 
   Build_kernel_Clang_script:
-      - ./eleven/clang.sh
+      - ./clang.sh
 
   Remove_old_build_script:
-      - ./eleven/rm.sh
+      - ./rm.sh
 
   Build_kernel_GCC_script:
-      - ./eleven/gcc.sh
+      - ./gcc.sh
 
   Notif_script:
-      - ./eleven/done.sh
+      - ./done.sh
