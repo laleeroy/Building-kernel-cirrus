@@ -56,9 +56,9 @@ make -j$(nproc --all) O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
     CROSS_COMPILE=${GCC_ROOTDIR}/bin/aarch64-elf- \
     CROSS_COMPILE_ARM32=${GCC_ROOTDIR32}/bin/arm-eabi- \
-    AR=${GCC_ROOTDIR32}/bin/aarch64-elf-ar \
-    OBJDUMP=${GCC_ROOTDIR32}/bin/aarch64-elf-objdump \
-    STRIP=${GCC_ROOTDIR32}/bin/aarch64-elf-strip
+    AR=${GCC_ROOTDIR}/bin/aarch64-elf-ar \
+    OBJDUMP=${GCC_ROOTDIR}/bin/aarch64-elf-objdump \
+    STRIP=${GCC_ROOTDIR}/bin/aarch64-elf-strip
    if ! [ -a "$IMAGE" ]; then
 	finerr
 	exit 1
