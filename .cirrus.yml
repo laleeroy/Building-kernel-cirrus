@@ -26,12 +26,6 @@ task:
   Sync_script:
       - ./download.sh
 
-  Build_kernel_Clang_script:
-      - ./clang.sh
-
-  Remove_old_build_script:
-      - ./rm.sh
-
   Build_kernel_GCC_script:
       - ./gcc.sh
 
