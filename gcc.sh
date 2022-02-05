@@ -2,7 +2,7 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=NeedForSpeed-GCC
+export KERNEL_NAME=Kewl-GCC
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
 GCC_ROOTDIR=$CIRRUS_WORKING_DIR/GCC64
@@ -77,7 +77,7 @@ function push() {
         -F "parse_mode=html" \
         -F caption="$KERNEL_NAME
 ==========================
-👤 Owner: AnGgIt86
+👤 Owner: nhAsif
 🏚️ Linux version: $KERNEL_VERSION
 🌿 Branch: $BRANCH
 🎁 Top commit: $LATEST_COMMIT
