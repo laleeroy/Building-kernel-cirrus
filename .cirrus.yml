@@ -1,7 +1,7 @@
 env:
     DEVICE_CODENAME: rosy
     BUILD_USER: rosy
-    BUILD_HOST: nfs-project
+    BUILD_HOST: nhAsif
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
     ANYKERNEL: "ENCRYPTED[714d28db47c375058945b8d323018b30653959617dbd6cc17aaf16b33d124ad13e714bc0fae0bfbaec5c4842dd8589f2]"
