@@ -27,7 +27,7 @@ task:
       - ./download.sh
 
   Build_kernel_GCC_script:
-      - ./gcc.sh
+      - ./clang.sh
 
   Notif_script:
       - ./done.sh
