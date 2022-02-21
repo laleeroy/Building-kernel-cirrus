@@ -35,5 +35,5 @@ task:
   Build_gcc_script:
       - ./gcc.sh
 
-  Notif_script:
+  Notif_script_gcc:
       - ./done.sh
