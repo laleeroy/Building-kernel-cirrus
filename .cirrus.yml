@@ -26,7 +26,13 @@ task:
   Sync_script:
       - ./download.sh
 
-  Build_kernel_gcc_script:
+  Build_clang_gcc_script:
+      - ./clang.sh
+      
+  Notif_script:
+      - ./done.sh
+ 
+  Build_gcc_script:
       - ./gcc.sh
 
   Notif_script:
