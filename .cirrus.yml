@@ -26,13 +26,13 @@ task:
   Sync_script:
       - ./download.sh
 
-  Build_gcc_script:
+  Build_clang_script:
       - ./clang.sh
 
   Notif_script_gcc:
       - ./done.sh
       
-   Build_gcc_script:
+  Build_gcc_script:
       - ./gcc.sh
 
   Notif_script_gcc:
